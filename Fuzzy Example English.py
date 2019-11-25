@@ -289,10 +289,10 @@ antecedent.clear()
 
 #Combine All Rules
 ruleall = uni.zadehUn(rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,rule9,rule10,rule11,rule12)
-plt.plot(price,rule12)
+plt.plot(price,ruleall)
 plt.xlabel('Price (10^3 rupiah)')
 plt.ylabel('Membership')
-plt.title('Rule 12')
+plt.title('Output Fuzzy System')
 plt.show()
 
 cent = defuz.centroid(price,rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,rule9,rule10,rule11,rule12)
