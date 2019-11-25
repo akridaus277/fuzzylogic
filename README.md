@@ -55,6 +55,7 @@ fuzzylogic depends on
 * Gaussian
 
 ## Running the Example
+To see the result of this example just simpy run "Fuzzy Example.py" on your Python IDE.
 
 In this example we are going to predict the price of flat rental based on : 
 * Distance from nearby university   (meter)
@@ -119,6 +120,8 @@ After defining their membership function, we can calculate membership degree cor
   distanceFar = ["trapmf",6000,8000,math.inf,math.inf]
   distanceFarMf = mf.membership(distanceFar, distance)
   ```
+![Distance Variable](/figure/distance.png)
+
 * Area Variable
   ```python
   areaSmall = ["trapmf",-math.inf,-math.inf,8,10]
@@ -126,6 +129,8 @@ After defining their membership function, we can calculate membership degree cor
   areaLarge = ["trapmf",8,10,math.inf,math.inf]
   areaLargeMf = mf.membership(areaLarge, area)
   ```
+![Area Variable](/figure/area.png)
+
 * Facility Variable
   ```python
   facilityCommon = ["trapmf",-math.inf,-math.inf,30,70]
@@ -133,6 +138,8 @@ After defining their membership function, we can calculate membership degree cor
   facilityFull = ["trapmf",30,70,math.inf,math.inf]
   facilityFullMf = mf.membership(facilityFull, facility)
   ```
+![Facility Variable](/figure/facility.png)
+
 * Price Variable
   ```python
   price1Cheap = ["linenegmf",250,350]
@@ -142,44 +149,183 @@ After defining their membership function, we can calculate membership degree cor
   price1High = ["trapmf",550,800,math.inf,math.inf]
   price1HighMf = mf.membership(price1High, price)
   ```
-### And coding style tests
+![Price Variable](/figure/price.png)
 
-Explain what these tests test and why
+### 3. Defining Input
+This system takes fuzzy set singleton as input. For this example we use 3 variables as input and 1 value each of them. 
+Suppose we want a flat with distance 2500 m, area 12 m^2, and facility 60%.
+  ```python
+inpDistance = [2500]
+inpArea = [12]
+inpFacility = [60]
+  ```
+### 4. Defining Rules and Compute Them with the Input
+Suppose we define 12 rules for our system, there are:
+#Rule Base
+1. IF Near AND Small AND Common THEN Cheap
+2. IF Near AND Large AND Common THEN High
+3. IF Near AND Small AND Full THEN Medium
+4. IF Near AND  Large AND Full THEN High
+5. IF Mid AND Small AND Common THEN Cheap
+6. IF Mid AND Large AND Common THEN Medium
+7. IF Mid AND Small AND Full THEN Medium
+8. IF Mid AND Large AND Full THEN High
+9. IF Far AND Small AND Common THEN Medium
+10. IF Far AND Large AND Common THEN High
+11. IF Far AND Small AND Full THEN Medium
+12. IF Far AND Large AND Full THEN High
 
+#### 1. IF Near AND Small AND Common THEN Cheap
+  ```python
+inpDistanceMf = mf.membership(distanceNear, inpDistance)
+inpAreaMf = mf.membership(areaSmall, inpArea)
+inpFacilityMf = mf.membership(facilityCommon, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule1 = imp.tsukamotoImp(antecedent,price1CheapMf)
+  ```
+![Output Rule 1](/figure/rule1.png)
+
+For every rule we compute, we should clear the membership of input and antecedent because their value in each iteration would be different, so we can use the same variable in every rule.
+
+  ```python
+inpDistanceMf.clear()
+inpAreaMf.clear()
+inpFacilityMf.clear()
+antecedent.clear()
+  ```
+#### 2. IF Near AND Large AND Common THEN High
+  ```python
+inpDistanceMf = mf.membership(distanceNear, inpDistance)
+inpAreaMf = mf.membership(areaLarge, inpArea)
+inpFacilityMf = mf.membership(facilityCommon, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule2 = imp.tsukamotoImp(antecedent,price1HighMf)
+  ```
+![Output Rule 2](/figure/rule2.png)  
+#### 3. IF Near AND Small AND Full THEN Medium
+  ```python
+inpDistanceMf = mf.membership(distanceNear, inpDistance)
+inpAreaMf = mf.membership(areaSmall, inpArea)
+inpFacilityMf = mf.membership(facilityFull, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule3 = imp.tsukamotoImp(antecedent,price1MedMf)
+  ```
+![Output Rule 3](/figure/rule3.png)
+#### 4. IF Near AND  Large AND Full THEN High
+  ```python
+inpDistanceMf = mf.membership(distanceNear, inpDistance)
+inpAreaMf = mf.membership(areaLarge, inpArea)
+inpFacilityMf = mf.membership(facilityFull, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule4 = imp.tsukamotoImp(antecedent,price1HighMf)
+  ```
+![Output Rule 4](/figure/rule4.png)
+#### 5. IF Mid AND Small AND Common THEN Cheap
+  ```python
+inpDistanceMf = mf.membership(distanceMid, inpDistance)
+inpAreaMf = mf.membership(areaSmall, inpArea)
+inpFacilityMf = mf.membership(facilityCommon, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule5 = imp.tsukamotoImp(antecedent,price1CheapMf)
+  ```
+![Output Rule 5](/figure/rule5.png)
+#### 6. IF Mid AND Large AND Common THEN Medium
+  ```python
+inpDistanceMf = mf.membership(distanceMid, inpDistance)
+inpAreaMf = mf.membership(areaLarge, inpArea)
+inpFacilityMf = mf.membership(facilityCommon, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule6 = imp.tsukamotoImp(antecedent,price1MedMf)
+  ``` 
+![Output Rule 6](/figure/rule6.png)
+#### 7. IF Mid AND Small AND Full THEN Medium
+  ```python
+inpDistanceMf = mf.membership(distanceMid, inpDistance)
+inpAreaMf = mf.membership(areaSmall, inpArea)
+inpFacilityMf = mf.membership(facilityFull, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule7 = imp.tsukamotoImp(antecedent,price1MedMf)
+  ```  
+![Output Rule 7](/figure/rule7.png)
+#### 8. IF Mid AND Large AND Full THEN High
+  ```python
+inpDistanceMf = mf.membership(distanceMid, inpDistance)
+inpAreaMf = mf.membership(areaLarge, inpArea)
+inpFacilityMf = mf.membership(facilityFull, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule8 = imp.tsukamotoImp(antecedent,price1HighMf)
+  ```  
+![Output Rule 8](/figure/rule8.png)
+#### 9. IF Far AND Small AND Common THEN Medium
+  ```python
+inpDistanceMf = mf.membership(distanceFar, inpDistance)
+inpAreaMf = mf.membership(areaSmall, inpArea)
+inpFacilityMf = mf.membership(facilityCommon, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule9 = imp.tsukamotoImp(antecedent,price1MedMf)
+  ```  
+![Output Rule 9](/figure/rule9.png)
+#### 10. IF Far AND Large AND Common THEN High
+  ```python
+inpDistanceMf = mf.membership(distanceFar, inpDistance)
+inpAreaMf = mf.membership(areaLarge, inpArea)
+inpFacilityMf = mf.membership(facilityCommon, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule10 = imp.tsukamotoImp(antecedent,price1HighMf)
+  ```  
+![Output Rule 10](/figure/rule10.png)
+#### 11. IF Far AND Small AND Full THEN Medium
+  ```python
+inpDistanceMf = mf.membership(distanceFar, inpDistance)
+inpAreaMf = mf.membership(areaSmall, inpArea)
+inpFacilityMf = mf.membership(facilityFull, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule11 = imp.tsukamotoImp(antecedent,price1MedMf)
+  ```  
+![Output Rule 11](/figure/rule11.png)
+#### 12. IF Far AND Large AND Full THEN High
+  ```python
+inpDistanceMf = mf.membership(distanceFar, inpDistance)
+inpAreaMf = mf.membership(areaLarge, inpArea)
+inpFacilityMf = mf.membership(facilityFull, inpFacility)
+antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
+rule12 = imp.tsukamotoImp(antecedent,price1HighMf)
+  ```  
+![Output Rule 12](/figure/rule12.png)
+
+### 5. Defuzzification
+Combining all the rules into one fuzzy set and then transform it into crisp set, so we can acquire the output of our fuzzy system.
+  ```python
+cent = defuz.centroid(price,rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,rule9,rule10,rule11,rule12)
+weiavg = defuz.weightedAverage(price,rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,rule9,rule10,rule11,rule12)
+fom = defuz.firstOfMaxima(price,rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,rule9,rule10,rule11,rule12)
+lom = defuz.lastOfMaxima(price,rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,rule9,rule10,rule11,rule12)
+mom = defuz.meanOfMaxima(price,rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,rule9,rule10,rule11,rule12)
+  ``` 
+![Output Fuzzy System](/figure/output.png)
+
+For this example, the system will give us output :
 ```
-Give an example
+The following output from the Fuzzy system based on several defuzzification methods:
+Centroid : 627.5
+Weighted Average : 625.0
+First Of Maxima : 737.5
+Last Of Maxima : 737.5
+Mean Of Maxima : 737.5
 ```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Spyder](https://www.spyder-ide.org/) - The Python IDE used
+* [Matplotlib](https://matplotlib.org/) - Graph Visualization Module
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Fachry Firdaus** - *Initial work* - [akridaus277](https://github.com/PurpleBooth)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-## License
+## Reference
+Fuzzy system design used in this example is based on (https://www.academia.edu/9786506/Implementasi_Fuzzy_Tsukamoto_untuk_Penentuan_Harga_Sewa_Kos)
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
