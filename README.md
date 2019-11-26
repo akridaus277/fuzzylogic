@@ -69,42 +69,42 @@ Suppose we're using Tsukamoto Inference Engine. Then the operators we're going t
 
 ### 1. Defining Linguistic Variables and Their Domain
 
-* Distance (0 <= X <= 10000) in meter
+* Distance (200 <= X <= 10000) in meter
   * Near
   * Mid
   * Far
-* Area (0 <= X <= 20) in meter^2
+* Area (4 <= X <= 20) in meter^2
   * Small
   * Large
 * Facility (0 <= X <= 100) in percent (%)
   * Common
   * Full
-* Price (0 <= X <= 1000) in Rupiah
+* Price (350 <= X <= 1500) in 10^3 Rupiah
   * Cheap
   * Medium
   * High
   
 ```python
-distance = mf.linspace(0,10000,10001)
-area = mf.linspace(0,20,2001)  
-facility = mf.linspace(0,100,101)
-price = mf.linspace(250,1000,75001) 
+distance = mf.linspace(200,10000,9801)
+area = mf.linspace(4,20,1601)  
+facility = mf.linspace(0,100,11)
+price = mf.linspace(350,1500,1151)   
 ```
-note that there are 10001 points between 0 and 10000 inlcuding themselves.
+note that there are 9801 points between 200 and 10000 inlcuding themselves.
 
 ### 2. Defining Fuzzy Set and Their Membership
 
-* Distance (0 <= X <= 10000) in meter
+* Distance (200 <= X <= 10000) in meter
   * Near, trapezoid
   * Mid, trapezoid
   * Far, trapezoid
-* Area (0 <= X <= 20) in meter^2
+* Area (4 <= X <= 20) in meter^2
   * Small, trapezoid
   * Large, tapezoid
 * Facility (0 <= X <= 100) in percent (%)
   * Common, trapezoid
   * Full, trapezoid
-* Price (0 <= X <= 1000) in Rupiah
+* Price (350 <= X <= 1000) in 10^3 Rupiah
   * Cheap, negative slope line
   * Medium, trapezoid
   * High, trapezoid
@@ -133,20 +133,20 @@ After defining their membership function, we can calculate membership degree cor
 
 * Facility Variable
   ```python
-  facilityCommon = ["trapmf",-math.inf,-math.inf,30,70]
+  facilityCommon = ["trapmf",-math.inf,-math.inf,20,40]
   facilityCommonMf = mf.membership(facilityCommon, facility)
-  facilityFull = ["trapmf",30,70,math.inf,math.inf]
+  facilityFull = ["trapmf",20,40,math.inf,math.inf]
   facilityFullMf = mf.membership(facilityFull, facility)
   ```
 ![Facility Variable](/figure/facility.png)
 
 * Price Variable
   ```python
-  price1Cheap = ["linenegmf",250,350]
+  price1Cheap = ["linenegmf",350,450]
   price1CheapMf = mf.membership(price1Cheap, price)
-  price1Med = ["trapmf",300,350,550,550]
+  price1Med = ["trapmf",400,450,750,950]
   price1MedMf = mf.membership(price1Med, price)
-  price1High = ["trapmf",550,800,math.inf,math.inf]
+  price1High = ["trapmf",850,1000,math.inf,math.inf]
   price1HighMf = mf.membership(price1High, price)
   ```
 ![Price Variable](/figure/price.png)
@@ -156,7 +156,7 @@ This system takes fuzzy set singleton as input. For this example we use 3 variab
 Suppose we want a flat with distance 2500 m, area 12 m^2, and facility 60%.
   ```python
 inpDistance = [2500]
-inpArea = [12]
+inpArea = [9]
 inpFacility = [60]
   ```
 ### 4. Defining Rules and Compute Them with the Input
@@ -307,11 +307,11 @@ mom = defuz.meanOfMaxima(price,rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,r
 For this example, the system will give us output :
 ```
 The following output from the Fuzzy system based on several defuzzification methods:
-Centroid : 627.5
-Weighted Average : 625.0
-First Of Maxima : 737.5
-Last Of Maxima : 737.5
-Mean Of Maxima : 737.5
+Centroid : 757.1428571428571
+Weighted Average : 805.0
+First Of Maxima : 425.0
+Last Of Maxima : 925.0
+Mean Of Maxima : 733.3333333333334
 ```
 
 ## Built With
