@@ -79,18 +79,18 @@ Suppose we're using Tsukamoto Inference Engine. Then the operators we're going t
 * Facility (0 <= X <= 100) in percent (%)
   * Common
   * Full
-* Price (350 <= X <= 1500) in 10^3 Rupiah
+* Price (250 <= X <= 1500) in 10^3 Rupiah
   * Cheap
   * Medium
   * High
   
 ```python
-distance = mf.linspace(200,10000,9801)
-area = mf.linspace(4,20,1601)  
-facility = mf.linspace(0,100,11)
-price = mf.linspace(350,1500,1151)   
+distance = mf.linspace(200,10000,98001)
+area = mf.linspace(4,20,16001)  
+facility = mf.linspace(0,100,10001)
+price = mf.linspace(250,1500,12501)    
 ```
-note that there are 9801 points between 200 and 10000 inlcuding themselves.
+note that there are 98001 points between 200 and 10000 inlcuding themselves. More points means more accurate.
 
 ### 2. Defining Fuzzy Set and Their Membership
 
@@ -104,7 +104,7 @@ note that there are 9801 points between 200 and 10000 inlcuding themselves.
 * Facility (0 <= X <= 100) in percent (%)
   * Common, trapezoid
   * Full, trapezoid
-* Price (350 <= X <= 1000) in 10^3 Rupiah
+* Price (250 <= X <= 1500) in 10^3 Rupiah
   * Cheap, negative slope line
   * Medium, trapezoid
   * High, trapezoid
@@ -142,11 +142,11 @@ After defining their membership function, we can calculate membership degree cor
 
 * Price Variable
   ```python
-  price1Cheap = ["linenegmf",350,450]
+  price1Cheap = ["linenegmf",250,450]
   price1CheapMf = mf.membership(price1Cheap, price)
-  price1Med = ["trapmf",400,450,750,950]
+  price1Med = ["trapmf",400,500,750,750]
   price1MedMf = mf.membership(price1Med, price)
-  price1High = ["trapmf",850,1000,math.inf,math.inf]
+  price1High = ["trapmf",750,1000,math.inf,math.inf]
   price1HighMf = mf.membership(price1High, price)
   ```
 ![Price Variable](/figure/price.png)
@@ -156,7 +156,7 @@ This system takes fuzzy set singleton as input. For this example we use 3 variab
 Suppose we want a flat with distance 2500 m, area 12 m^2, and facility 60%.
   ```python
 inpDistance = [2500]
-inpArea = [9]
+inpArea = [12]
 inpFacility = [60]
   ```
 ### 4. Defining Rules and Compute Them with the Input
@@ -307,11 +307,11 @@ mom = defuz.meanOfMaxima(price,rule1,rule2,rule3,rule4,rule5,rule6,rule7,rule8,r
 For this example, the system will give us output :
 ```
 The following output from the Fuzzy system based on several defuzzification methods:
-Centroid : 757.1428571428571
-Weighted Average : 805.0
-First Of Maxima : 425.0
-Last Of Maxima : 925.0
-Mean Of Maxima : 733.3333333333334
+Centroid : 810.0
+Weighted Average : 810.4166666666666
+First Of Maxima : 937.5
+Last Of Maxima : 937.5
+Mean Of Maxima : 937.5
 ```
 
 ## Built With
