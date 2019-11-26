@@ -185,6 +185,11 @@ rule1 = imp.tsukamotoImp(antecedent,price1CheapMf)
   ```
 ![Output Rule 1](/figure/rule1.png)
 
+```
+alpha-predicate1 = 0
+z1 = 250
+```
+
 For every rule we compute, we should clear the membership of input and antecedent because their value in each iteration would be different, so we can use the same variable in every rule.
 
   ```python
@@ -202,6 +207,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule2 = imp.tsukamotoImp(antecedent,price1HighMf)
   ```
 ![Output Rule 2](/figure/rule2.png)  
+ ```
+alpha-predicate2 = 0.25
+z2 = 812.5
+```
 #### 3. IF Near AND Small AND Full THEN Medium
   ```python
 inpDistanceMf = mf.membership(distanceNear, inpDistance)
@@ -211,6 +220,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule3 = imp.tsukamotoImp(antecedent,price1MedMf)
   ```
 ![Output Rule 3](/figure/rule3.png)
+ ```
+alpha-predicate3 = 0
+z3 = 250
+```
 #### 4. IF Near AND  Large AND Full THEN High
   ```python
 inpDistanceMf = mf.membership(distanceNear, inpDistance)
@@ -220,6 +233,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule4 = imp.tsukamotoImp(antecedent,price1HighMf)
   ```
 ![Output Rule 4](/figure/rule4.png)
+ ```
+alpha-predicate4 = 0.75
+z4 = 937.5
+```
 #### 5. IF Mid AND Small AND Common THEN Cheap
   ```python
 inpDistanceMf = mf.membership(distanceMid, inpDistance)
@@ -229,6 +246,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule5 = imp.tsukamotoImp(antecedent,price1CheapMf)
   ```
 ![Output Rule 5](/figure/rule5.png)
+ ```
+alpha-predicate5 = 0
+z5 = 250
+```
 #### 6. IF Mid AND Large AND Common THEN Medium
   ```python
 inpDistanceMf = mf.membership(distanceMid, inpDistance)
@@ -238,6 +259,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule6 = imp.tsukamotoImp(antecedent,price1MedMf)
   ``` 
 ![Output Rule 6](/figure/rule6.png)
+ ```
+alpha-predicate6 = 0.25
+z6 = 425.0
+```
 #### 7. IF Mid AND Small AND Full THEN Medium
   ```python
 inpDistanceMf = mf.membership(distanceMid, inpDistance)
@@ -246,7 +271,12 @@ inpFacilityMf = mf.membership(facilityFull, inpFacility)
 antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule7 = imp.tsukamotoImp(antecedent,price1MedMf)
   ```  
+
 ![Output Rule 7](/figure/rule7.png)
+ ```
+alpha-predicate7 = 0
+z7 = 250
+```
 #### 8. IF Mid AND Large AND Full THEN High
   ```python
 inpDistanceMf = mf.membership(distanceMid, inpDistance)
@@ -256,6 +286,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule8 = imp.tsukamotoImp(antecedent,price1HighMf)
   ```  
 ![Output Rule 8](/figure/rule8.png)
+ ```
+alpha-predicate8 = 0.25
+z8 = 812.5
+```
 #### 9. IF Far AND Small AND Common THEN Medium
   ```python
 inpDistanceMf = mf.membership(distanceFar, inpDistance)
@@ -265,6 +299,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule9 = imp.tsukamotoImp(antecedent,price1MedMf)
   ```  
 ![Output Rule 9](/figure/rule9.png)
+ ```
+alpha-predicate9 = 0
+z9 = 250
+```
 #### 10. IF Far AND Large AND Common THEN High
   ```python
 inpDistanceMf = mf.membership(distanceFar, inpDistance)
@@ -274,6 +312,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule10 = imp.tsukamotoImp(antecedent,price1HighMf)
   ```  
 ![Output Rule 10](/figure/rule10.png)
+ ```
+alpha-predicate10 = 0
+z10 = 250
+```
 #### 11. IF Far AND Small AND Full THEN Medium
   ```python
 inpDistanceMf = mf.membership(distanceFar, inpDistance)
@@ -283,6 +325,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule11 = imp.tsukamotoImp(antecedent,price1MedMf)
   ```  
 ![Output Rule 11](/figure/rule11.png)
+ ```
+alpha-predicate11 = 0
+z11 = 250
+```
 #### 12. IF Far AND Large AND Full THEN High
   ```python
 inpDistanceMf = mf.membership(distanceFar, inpDistance)
@@ -292,6 +338,10 @@ antecedent = inter.zadehIn(inpDistanceMf,inpAreaMf,inpFacilityMf)
 rule12 = imp.tsukamotoImp(antecedent,price1HighMf)
   ```  
 ![Output Rule 12](/figure/rule12.png)
+ ```
+alpha-predicate12 = 0
+z12 = 250
+```
 
 ### 5. Defuzzification
 Combining all the rules into one fuzzy set and then transform it into crisp set, so we can acquire the output of our fuzzy system.
