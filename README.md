@@ -363,7 +363,11 @@ First Of Maxima : 937.5
 Last Of Maxima : 937.5
 Mean Of Maxima : 937.5
 ```
-
+```
+z* = sum (alpha-predicatei x zi) / sum (alpha-predicatei)
+z* = (0+0.24*812.5+0+0.75*937.5+0+0.25*425+0+0.25*812.5+0+0+0+0) / (0+0.25+0+0.75+0+0.25+0+0.25+0+0+0+0)
+z* = 810.41666666
+```
 ## Built With
 
 * [Spyder](https://www.spyder-ide.org/) - The Python IDE used
