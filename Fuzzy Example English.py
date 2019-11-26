@@ -22,10 +22,10 @@ import matplotlib.pyplot as plt
 
 
 #Domain
-distance = mf.linspace(0,10000,10001)
-area = mf.linspace(0,20,2001)  
-facility = mf.linspace(0,100,101)
-price = mf.linspace(250,1000,75001)   
+distance = mf.linspace(200,10000,9801)
+area = mf.linspace(4,20,1601)  
+facility = mf.linspace(0,100,11)
+price = mf.linspace(350,1500,1151)         
 
 #Fuzzy Set
 distanceNear = ["trapmf",-math.inf,-math.inf,2000,4000]
@@ -41,10 +41,7 @@ plt.xlabel('Distance (m)')
 plt.ylabel('Membership')
 plt.title('Distance from Nearby University')
 plt.legend()
-
-
 plt.show()
-
 
 areaSmall = ["trapmf",-math.inf,-math.inf,8,10]
 areaSmallMf = mf.membership(areaSmall, area)
@@ -58,11 +55,10 @@ plt.title('Area of Flat')
 plt.legend()
 plt.show()
 
-
-facilityCommon = ["trapmf",-math.inf,-math.inf,30,70]
+facilityCommon = ["trapmf",-math.inf,-math.inf,20,40]
 facilityCommonMf = mf.membership(facilityCommon, facility)
 plt.plot(facility,facilityCommonMf,  label = "Common")
-facilityFull = ["trapmf",30,70,math.inf,math.inf]
+facilityFull = ["trapmf",20,40,math.inf,math.inf]
 facilityFullMf = mf.membership(facilityFull, facility)
 plt.plot(facility,facilityFullMf,  label = "Full")
 plt.xlabel('Fasilitas (%)')
@@ -71,14 +67,13 @@ plt.title('Facility of Flat')
 plt.legend()
 plt.show()
 
-
-price1Cheap = ["linenegmf",250,350]
+price1Cheap = ["linenegmf",350,450]
 price1CheapMf = mf.membership(price1Cheap, price)
 plt.plot(price,price1CheapMf,  label = "Cheap")
-price1Med = ["trapmf",300,350,550,550]
+price1Med = ["trapmf",400,450,750,950]
 price1MedMf = mf.membership(price1Med, price)
 plt.plot(price,price1MedMf,  label = "Medium")
-price1High = ["trapmf",550,800,math.inf,math.inf]
+price1High = ["trapmf",850,1000,math.inf,math.inf]
 price1HighMf = mf.membership(price1High, price)
 plt.plot(price,price1HighMf,  label = "High")
 plt.xlabel('Price (10^3 Rupiah)')
@@ -103,7 +98,7 @@ plt.show()
 #12   IF Far AND Large AND Full THEN High
 
 inpDistance = [2500]
-inpArea = [12]
+inpArea = [9]
 inpFacility = [60]
 
 #1   IF dekat AND sempit AND biasa MAKA murah
